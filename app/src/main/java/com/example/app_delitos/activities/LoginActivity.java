@@ -40,10 +40,10 @@ public class LoginActivity extends BaseActivity {
             hideKeyboard(v);
 
             if (hasConnection()) {
+                showProgressDialog("Ingresando", "Espere por favor...");
+
                 String email = binding.emailUser.getText().toString();
                 String password = binding.passwordUser.getText().toString();
-
-
 
                 // Validacion de campos
                 if (email.trim().isEmpty() || password.trim().isEmpty()) {
@@ -67,6 +67,8 @@ public class LoginActivity extends BaseActivity {
                             getPrefs().saveLUserTokenType(data.getString(Response.USER_TOKEN_TYPE));
                             getPrefs().saveLUserTokenExpiration(data.getString(Response.USER_TOKEN_EXPIRATION));
 
+                            hideProgressDialog();
+                            goActivity(MainActivity.class, true);
                         } catch (JSONException e) {
                             Toast.makeText(LoginActivity.this, "Error desconocido, vuelve a intentarlo por favor", Toast.LENGTH_SHORT).show();
 
