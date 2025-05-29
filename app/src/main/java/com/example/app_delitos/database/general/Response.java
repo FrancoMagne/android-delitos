@@ -6,6 +6,14 @@ public class Response {
     public final static String MESSAGE = "message";
     public final static String DATA = "data";
 
+    public final static String USER_ID = "user_id";
+    public final static String USER_NAME = "user_name";
+    public final static String USER_EMAIL = "user_email";
+    public final static String USER_TOKEN = "token";
+    public final static String USER_TOKEN_TYPE = "token_type";
+    public final static String USER_TOKEN_EXPIRATION = "token_expiration";
+
+
     // FORCED MESSAGE ERROR
     public final static String MESSAGE_ERROR = "Ocurrió un error";
 
