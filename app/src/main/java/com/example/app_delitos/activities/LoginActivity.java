@@ -46,10 +46,10 @@ public class LoginActivity extends BaseActivity {
                 String password = binding.passwordUser.getText().toString();
 
                 // Validacion de campos
-                if (email.trim().isEmpty() || password.trim().isEmpty()) {
-                    showSnackBarDefault("Los campos email y contraseña son requeridos.");
-                    return;
-                }
+                //if (email.trim().isEmpty() || password.trim().isEmpty()) {
+                //    showSnackBarDefault("Los campos email y contraseña son requeridos.");
+                //    return;
+                //}
 
                 // POST al endpoint del Login
                 request = new WebRequest(getApplicationContext(), new WebRequest.ResponseListener() {
@@ -80,8 +80,18 @@ public class LoginActivity extends BaseActivity {
                     public void onFailure(int statusCode, Header[] headers, String message) {
                         Log.i(TAG, "WebRequest::onFailure: onFailure -> " + statusCode);
                         Log.i(TAG, "WebRequest::onFailure: message -> " + message);
-
-
+                        hideProgressDialog();
+                        switch (statusCode) {
+                            case Response.UNAUTHORIZED:
+                                Toast.makeText(LoginActivity.this, "Error: "+message, Toast.LENGTH_SHORT).show();
+                                break;
+                            case Response.UNPROCESSABLE_ENTITY:
+                                Toast.makeText(LoginActivity.this, "Error: "+message, Toast.LENGTH_SHORT).show();
+                                break;
+                            default: // ERROR 5XX
+                                Toast.makeText(LoginActivity.this, "Error en el servidor", Toast.LENGTH_SHORT).show();
+                                break;
+                        }
                     }
                 });
 
